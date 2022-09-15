@@ -1,0 +1,26 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 71px;
+    margin-bottom: 89px;
+    .head {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+}
+.content {
+  flex: 1 0 auto;
+}
+
+@media (min-width: 1286px) {
+  .container {
+    width: 1286px;
+  }
+}
