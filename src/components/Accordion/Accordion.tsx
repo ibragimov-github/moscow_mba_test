@@ -7,6 +7,10 @@ type TypeAccordion = {
   content: object[]
 }
 
+type TypeEL = {
+  string?: string
+}
+
 function Accordion({moduleNum, content}: TypeAccordion) {
   const [isActive, setIsActive] = useState(false);
   const style = {
@@ -30,11 +34,13 @@ function Accordion({moduleNum, content}: TypeAccordion) {
         className={styles['accordion-content']}
       >
         <ul>
-          {content.map((el: any) => (
-            <li
-              key={v4()}
-            >{el.string}</li>
-          ))}
+          {content.map((el: TypeEL) => {
+            return (
+              <li
+                key={v4()}
+              >{el.string}</li>
+            );
+          })}
         </ul>
       </div>
     </div >

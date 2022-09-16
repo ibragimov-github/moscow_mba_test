@@ -6,18 +6,20 @@ import { useState, useEffect } from 'react'
 import Accordion from '../Accordion/Accordion'
 import { v4 } from 'uuid';
 
+type TypeEl = {
+  title?: string,
+  specializedSubjects?: object[]
+}
 
+type TypelistEl = {
+  string?: string
+}
 
 function Content() {
   const apiKey = 'https://api-moscow-mba.herokuapp.com/products'
   const [showPrograms, setShowPrograms] = useState<object[]>([])
-  function getRandomArbitrary(min = 0, max = 95) {
-    const random = Math.floor(Math.random() * (max - min) + min);
-    return random
-  }
   useEffect(() => {
-    const random = getRandomArbitrary()
-    const acc: any = []
+    const acc: object[] = []
     axios.get(apiKey).then(({ data }) => {
       for (let i of data.slice(63, 68)) {
         acc.push(i)
@@ -34,7 +36,7 @@ function Content() {
             barColor='red'
           />
         </div> :
-        showPrograms.map((el: any) => {
+        showPrograms.map((el: TypeEl) => {
           return (
             <div
               key={v4()}
@@ -47,7 +49,7 @@ function Content() {
                   <div className={styles.first}>
                     <h3 className={styles['module-title']}>1 Модуль</h3>
                     <ul className={styles['module-list']}>
-                      {el.specializedSubjects.slice(0, 5).map((listEl: any) => (
+                      {el.specializedSubjects!.slice(0, 5).map((listEl: TypelistEl) => (
                         <li
                           key={v4()}
                         >{listEl.string}</li>
@@ -57,7 +59,7 @@ function Content() {
                   <div className={styles.second}>
                     <h3 className={styles['module-title']}>2 Модуль</h3>
                     <ul className={styles['module-list']}>
-                      {el.specializedSubjects.slice(5, 10).map((listEl: any) => (
+                      {el.specializedSubjects!.slice(5, 10).map((listEl: TypelistEl) => (
                         <li
                           key={v4()}
                         >{listEl.string}</li>
@@ -70,11 +72,11 @@ function Content() {
                 <h2 className={styles['card-title']}>{el.title}</h2>
                 <Accordion
                   moduleNum='1 модуль'
-                  content={el.specializedSubjects.slice(0, 5)}
+                  content={el.specializedSubjects!.slice(0, 5)}
                 />
                 <Accordion
                   moduleNum='2 модуль'
-                  content={el.specializedSubjects.slice(5, 10)}
+                  content={el.specializedSubjects!.slice(5, 10)}
                 />
               </div>
             </div>
