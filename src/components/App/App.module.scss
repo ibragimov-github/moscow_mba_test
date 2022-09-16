@@ -3,24 +3,40 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+
   .header {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 71px;
     margin-bottom: 89px;
+
+
+  }
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1286px;
+
     .head {
       font-size: 36px;
       font-weight: 700;
     }
   }
 }
-.content {
-  flex: 1 0 auto;
-}
 
-@media (min-width: 1286px) {
+@media (min-width: 375px) and (max-width: 1439.98px) {
   .container {
-    width: 1286px;
+    width: 345px;
+
+    .head {
+      font-weight: 500;
+      font-size: 28px;
+    }
   }
 }

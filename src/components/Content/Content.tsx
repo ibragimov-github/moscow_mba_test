@@ -3,6 +3,8 @@ import styles from './Content.module.scss'
 import axios from 'axios'
 import { ProgressBar } from 'react-loader-spinner'
 import { useState, useEffect } from 'react'
+import Accordion from '../Accordion/Accordion'
+import { v4 } from 'uuid';
 
 
 
@@ -19,7 +21,6 @@ function Content() {
     axios.get(apiKey).then(({ data }) => {
       for (let i of data.slice(63, 68)) {
         acc.push(i)
-        console.log(i)
         setShowPrograms(acc)
       }
 
@@ -36,31 +37,45 @@ function Content() {
         showPrograms.map((el: any) => {
           return (
             <div
-              key={Date.now() + getRandomArbitrary()}
-              className={styles.card}
+              key={v4()}
             >
-              <h2 className={styles['card-title']}>{el.title}</h2>
-              <div className={styles['module-container']}>
-                <div className={styles.first}>
-                  <h3 className={styles['module-title']}>1 Модуль</h3>
-                  <ul className={styles['module-list']}>
-                    {el.specializedSubjects.slice(0, 5).map((listEl: any) => (
-                      <li
-                        key={Date.now() + getRandomArbitrary()}
-                      >{listEl.string}</li>
-                    ))}
-                  </ul>
+              <div
+                className={styles['card-desktop']}
+              >
+                <h2 className={styles['card-title']}>{el.title}</h2>
+                <div className={styles['module-container']}>
+                  <div className={styles.first}>
+                    <h3 className={styles['module-title']}>1 Модуль</h3>
+                    <ul className={styles['module-list']}>
+                      {el.specializedSubjects.slice(0, 5).map((listEl: any) => (
+                        <li
+                          key={v4()}
+                        >{listEl.string}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className={styles.second}>
+                    <h3 className={styles['module-title']}>2 Модуль</h3>
+                    <ul className={styles['module-list']}>
+                      {el.specializedSubjects.slice(5, 10).map((listEl: any) => (
+                        <li
+                          key={v4()}
+                        >{listEl.string}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div className={styles.second}>
-                  <h3 className={styles['module-title']}>2 Модуль</h3>
-                  <ul className={styles['module-list']}>
-                    {el.specializedSubjects.slice(5, 10).map((listEl: any) => (
-                      <li
-                        key={Date.now() + getRandomArbitrary()}
-                      >{listEl.string}</li>
-                    ))}
-                  </ul>
-                </div>
+              </div>
+              <div className={styles['card-mobile']}>
+                <h2 className={styles['card-title']}>{el.title}</h2>
+                <Accordion
+                  moduleNum='1 модуль'
+                  content={el.specializedSubjects.slice(0, 5)}
+                />
+                <Accordion
+                  moduleNum='2 модуль'
+                  content={el.specializedSubjects.slice(5, 10)}
+                />
               </div>
             </div>
           )

@@ -10,7 +10,7 @@
     justify-content: center;
   }
 
-  .card {
+  .card-desktop {
     width: 100%;
 
     .card-title {
@@ -60,4 +60,18 @@
   }
 }
 
-@media (min-width: 1286px) {}
+@media (min-width: 1286px) {
+  .card-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 1439.98px) {
+  .card-desktop {
+    display: none;
+  }
+
+  .card-mobile {
+    margin-top: 35px;
+  }
+}
